@@ -7,6 +7,9 @@ cache:
   directories:
     - "node_modules"
 
+install:
+  - npm i
+
 script:
   - hexo clean
   - hexo d
