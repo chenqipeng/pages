@@ -19,5 +19,6 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   local-dir: public
+  target-branch: master
   on:
     branch: master
