@@ -17,7 +17,7 @@ script:
 deploy:
   provider: pages
   local-dir: public
-  repo: https://github.com/chenqipeng/chenqipeng.github.io.git
+  repo: chenqipeng/chenqipeng.github.io
   target-branch: master
   skip-cleanup: true
   keep-history: true
