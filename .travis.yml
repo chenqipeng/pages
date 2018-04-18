@@ -16,9 +16,11 @@ script:
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
   local-dir: public
+  repo: https://github.com/chenqipeng/chenqipeng.github.io.git
   target-branch: master
+  skip-cleanup: true
+  keep-history: true
+  github-token: $GITHUB_TOKEN
   on:
     branch: master
