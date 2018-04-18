@@ -1,13 +1,11 @@
 ---
-title: compare-null-with-zero
-date: 2018-04-18 23:51:27
+title: null 与 0 的比较判断
+date: 2018-04-18
 categories:
 - stuff
 tags:
 - Javascript
 ---
-# null 与 0 的比较判断
-
 ```javascript
 //val值得可能为数字类型或null
 return val >= 0
