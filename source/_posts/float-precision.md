@@ -1,5 +1,5 @@
 ---
-title: float-precision
+title: 浮点数精度问题
 date: 2018-04-19 00:39:00
 categories:
 - stuff
