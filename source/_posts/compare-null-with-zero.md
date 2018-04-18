@@ -6,6 +6,7 @@ categories:
 tags:
 - Javascript
 ---
+
 ```javascript
 //val值得可能为数字类型或null
 return val >= 0
