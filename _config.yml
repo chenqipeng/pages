@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Stuff
 subtitle:
 description:
 keywords:
-author: John Doe
+author: chenqipeng
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://chenqipeng.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -44,7 +44,7 @@ highlight:
   auto_detect: false
   tab_replace:
   
-# Home page setting
+# Home page setting 
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
