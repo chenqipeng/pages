@@ -1,0 +1,8 @@
+section
+  each item in page.posts.toArray()
+    article
+      a(href=url_for(item.path)) #{item.title}
+        time (#{date(item.date, "YYYY-MM-DD")}) - 
+        span
+          each tag, index in item.tags.toArray()
+            i #{index ? "/" : ""}#{tag.name}

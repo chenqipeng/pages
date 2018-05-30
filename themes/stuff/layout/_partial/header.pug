@@ -1,0 +1,15 @@
+header
+  nav
+    ul
+      li
+        a(href=url_for()) #{config.title}
+      li
+        ul
+          each item in site.categories.toArray()
+            li
+              a(href=url_for("/categories/"+item.name)) #{item.name}
+      li
+        ul
+          each item in site.tags.toArray()
+            li
+              a(href=url_for("/tags/"+item.name)) #{item.name}
