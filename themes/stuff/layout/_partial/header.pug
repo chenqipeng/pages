@@ -1,15 +1,17 @@
 header
   nav
-    ul
-      li
+    .header-nav-item
+      div
         a(href=url_for()) #{config.title}
-      li
-        ul
-          each item in site.categories.toArray()
-            li
-              a(href=url_for("/categories/"+item.name)) #{item.name}
-      li
-        ul
-          each item in site.tags.toArray()
-            li
-              a(href=url_for("/tags/"+item.name)) #{item.name}
+    .header-nav-item
+      div #{page.category || 'Categories'}
+      ul
+        each item in site.categories.toArray()
+          li
+            a(href=url_for("/categories/"+item.name)) #{item.name}
+    .header-nav-item
+      div #{page.tag || 'Tags'}
+      ul
+        each item in site.tags.toArray()
+          li
+            a(href=url_for("/tags/"+item.name)) #{item.name}#{item.name}#{item.name}

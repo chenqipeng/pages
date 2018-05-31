@@ -1,0 +1,44 @@
+HoverBgc = #fff
+
+header
+  background-color: HeaderBgc
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  height: HeaderHeight
+  padding: 0 100px
+  nav
+    height: 100%
+  ul
+    none-list()
+
+.header-nav-item
+  float: left
+  width: 150px
+  height: 100%
+  &>div
+    height: 100%
+    padding: 0 5px
+    line-height: HeaderHeight
+    overflow: hidden
+    text-overflow: ellipsis
+  ul
+    background-color: HeaderBgc
+    display: none
+    li
+      height: 30px
+      line-height: 30px
+      &:hover
+        background-color: HoverBgc
+      a
+        display: block
+        height: 100%
+        padding: 0 5px
+        overflow: hidden
+        text-overflow: ellipsis
+  &:hover
+    cursor: pointer
+    background-color: HoverBgc
+    ul
+      display: block
