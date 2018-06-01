@@ -1,4 +1,5 @@
-HoverBgc = #fff
+HoverBgc = rgba(219, 219, 220, 0.4)
+HeaderNavHeight = 40px
 
 header
   background-color: HeaderBgc
@@ -23,20 +24,22 @@ header
     line-height: HeaderHeight
     overflow: hidden
     text-overflow: ellipsis
+    color: #777
   ul
     background-color: HeaderBgc
     display: none
     li
-      height: 30px
-      line-height: 30px
+      height: HeaderNavHeight
+      line-height: HeaderNavHeight
+      padding: 0 5px
       &:hover
         background-color: HoverBgc
-      a
-        display: block
-        height: 100%
-        padding: 0 5px
-        overflow: hidden
-        text-overflow: ellipsis
+  a
+    display: block
+    height: 100%
+    overflow: hidden
+    text-overflow: ellipsis
+    text-decoration: none
   &:hover
     cursor: pointer
     background-color: HoverBgc
