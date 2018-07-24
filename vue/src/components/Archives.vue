@@ -11,19 +11,19 @@
 </template>
 
 <script>
-import { GraphQLClient } from 'graphql-request'
+import {
+  RepositoryOwner,
+  RepositoryName,
+  RepositoryBranch,
+  RepositoryPath
+} from '@/GraphQLConfig'
 
 export default {
   name: 'Archives',
 
   data () {
     return {
-      archivesData: [],
-      client: new GraphQLClient('https://api.github.com/graphql', {
-        headers: {
-          Authorization: 'bearer 1fcd6d38878f79c0f92203d5369d9efcece042be'
-        }
-      })
+      archivesData: []
     }
   },
 
@@ -32,11 +32,12 @@ export default {
   },
 
   methods: {
+
     queryArchives () {
-      const queryTree = `
-        query($object_expression:String!) {
-          repository(owner: "chenqipeng", name: "pages") {
-            object(expression: $object_expression) {
+      const query = `
+        query {
+          repository(owner: "${RepositoryOwner}", name: "${RepositoryName}") {
+            object(expression: "${RepositoryBranch + RepositoryPath}") {
               ... on Tree {
                 entries {
                   name
@@ -49,22 +50,17 @@ export default {
         }
       `
 
-      let variables = {
-        object_expression: 'master:hexo/source/_posts/'
-      }
-
       this.client
-        .request(queryTree, variables)
+        .request(query)
         .then(data => {
           this.archivesData = data.repository.object.entries
         })
         .catch(error => {
           console.log(error)
-          debugger
         })
     }
-  }
 
+  }
 }
 </script>
 

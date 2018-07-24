@@ -6,10 +6,15 @@
 </template>
 
 <script>
-import { GraphQLClient } from 'graphql-request'
 import MarkdownIt from 'markdown-it'
 import FrontMatter from 'front-matter'
 import hljs from 'highlight.js'
+import {
+  RepositoryOwner,
+  RepositoryName,
+  RepositoryBranch,
+  RepositoryPath
+} from '@/GraphQLConfig'
 
 export default {
   name: 'Post',
@@ -24,12 +29,7 @@ export default {
           tags: []
         },
         body: ''
-      },
-      client: new GraphQLClient('https://api.github.com/graphql', {
-        headers: {
-          Authorization: 'bearer 1fcd6d38878f79c0f92203d5369d9efcece042be'
-        }
-      })
+      }
     }
   },
 
@@ -38,11 +38,12 @@ export default {
   },
 
   methods: {
+
     queryPostData () {
-      const queryBlob = `
-        query($object_expression:String!) {
-          repository(owner: "chenqipeng", name: "pages") {
-            object(expression: $object_expression) {
+      const query = `
+        query {
+          repository(owner: "${RepositoryOwner}", name: "${RepositoryName}") {
+            object(expression: "${RepositoryBranch + RepositoryPath + this.$route.params.name}") {
               ... on Blob {
                 text
               }
@@ -51,12 +52,8 @@ export default {
         }
       `
 
-      let variables = {
-        object_expression: 'master:hexo/source/_posts/' + this.$route.params.name
-      }
-
       this.client
-        .request(queryBlob, variables)
+        .request(query)
         .then(data => {
           let markdownIt = new MarkdownIt({
             highlight (str, lang) {
@@ -76,9 +73,9 @@ export default {
         })
         .catch(error => {
           console.log(error)
-          debugger
         })
     }
+
   }
 }
 </script>
