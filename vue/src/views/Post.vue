@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h1>{{postTitle}}</h1>
-    <div id="md" class="md markdown-body"/>
+    <h1>{{postData.attributes.title}}</h1>
+    <div id="md" class="md markdown-body" v-html="postData.body"/>
   </div>
 </template>
 
 <script>
 import { GraphQLClient } from 'graphql-request'
 import MarkdownIt from 'markdown-it'
-// import MIFrontMatter from 'markdown-it-front-matter'
 import FrontMatter from 'front-matter'
 import hljs from 'highlight.js'
 
@@ -17,8 +16,15 @@ export default {
 
   data () {
     return {
-      postTitle: this.$route.params.name,
-      postData: '',
+      postData: {
+        attributes: {
+          title: '',
+          date: '',
+          categories: [],
+          tags: []
+        },
+        body: ''
+      },
       client: new GraphQLClient('https://api.github.com/graphql', {
         headers: {
           Authorization: 'bearer 1fcd6d38878f79c0f92203d5369d9efcece042be'
@@ -52,8 +58,6 @@ export default {
       this.client
         .request(queryBlob, variables)
         .then(data => {
-          this.postData = data.repository.object.text
-          let mdEl = document.querySelector('#md')
           let markdownIt = new MarkdownIt({
             highlight (str, lang) {
               if (lang && hljs.getLanguage(lang)) {
@@ -66,18 +70,9 @@ export default {
               return ''
             }
           })
-          // markdownIt.use(MIFrontMatter, fm => {
-          //   console.log(fm)
-          //   debugger
-          // })
-          let dataObj = FrontMatter(this.postData)
-          mdEl.innerHTML = markdownIt.render(dataObj.body)
-
-          // this.$nextTick(() => {
-          //   document.querySelectorAll('pre code').forEach(el => {
-          //     hljs.highlightBlock(el)
-          //   })
-          // })
+          let dataObj = FrontMatter(data.repository.object.text)
+          dataObj.body = markdownIt.render(dataObj.body)
+          this.postData = dataObj
         })
         .catch(error => {
           console.log(error)
