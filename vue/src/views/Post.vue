@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>{{postData.attributes.title}}</h1>
+    <p>
+      <span v-for="cate in postData.attributes.categories"></span>
+    </p>
     <div id="md" class="md markdown-body" v-html="postData.body"/>
   </div>
 </template>
@@ -34,6 +37,11 @@ export default {
   },
 
   created () {
+    this.queryPostData()
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    next()
     this.queryPostData()
   },
 

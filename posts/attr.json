@@ -1,5 +1,1 @@
-{
-  "posts": [],
-  "tags": {},
-  "categories": {}
-}
+{"tagMap":{"Javascript":["Array的forEach与splice","attachEvent","null 与 0 的比较判断","Promise基础原理","浮点数精度问题"],"DOM":["attachEvent","DOMContentLoaded","KeyboardEvent的事件类型"],"Event":["attachEvent","KeyboardEvent的事件类型"],"CSS":["line-height设置不同值在子元素继承下的不同","margin和padding设置百分比值","nth-of-type选择符"],"Markdown":["Markdown语法小记"],"计算机原理":["浮点数精度问题"]},"categorieMap":{"stuff":["Array的forEach与splice","attachEvent","DOMContentLoaded","KeyboardEvent的事件类型","line-height设置不同值在子元素继承下的不同","margin和padding设置百分比值","Markdown语法小记","nth-of-type选择符","null 与 0 的比较判断","Promise基础原理","浮点数精度问题"]}}

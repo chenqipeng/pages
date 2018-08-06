@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <Archives/>
+    <div class="side-bar">
+      <Archives/>
+    </div>
+    <router-view/>
   </div>
 </template>
 
@@ -15,3 +18,14 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.home
+  padding-left 350px
+
+.side-bar
+  position fixed
+  top 30px
+  left 0
+  width 350px
+</style>

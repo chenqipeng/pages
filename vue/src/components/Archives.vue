@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <ul>
-      <li
-        v-for="post in archivesData"
-        :key="post.oid">
-        <a :href="'/post/'+post.name">{{post.name}}</a>
-      </li>
-    </ul>
-  </div>
+  <ul class="posts-list">
+    <li
+      v-for="post in archivesData"
+      :key="post.oid">
+      <span @click="checkPost(post.name)">{{post.name}}</span>
+      <!-- <a :href="'/post/'+post.name">{{post.name}}</a> -->
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -32,6 +31,11 @@ export default {
   },
 
   methods: {
+
+    checkPost (name) {
+      this.$router.push('/post/' + name)
+      this.$emit('checkPost', name)
+    },
 
     queryArchives () {
       const query = `
@@ -64,6 +68,16 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="stylus" scoped>
+.posts-list
+  margin 0
+  padding 0
+  list-style none
+  li
+    height 30px
+    line-height 30px
+    span
+      color #0366d6
+      &:hover
+        cursor pointer
 </style>
