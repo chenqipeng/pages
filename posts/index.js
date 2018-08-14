@@ -22,30 +22,30 @@ fs.readdir('archives', 'utf8', (err, files) => {
   Promise.all(promises)
     .then(dataList => {
       let attrsFiles = dataList.map(item => fm(item).attributes);
-      let tagMap = {};
-      let categorieMap = {};
+      // let tagMap = {};
+      // let categoryMap = {};
 
-      attrsFiles.forEach(item => {
-        item.categories.forEach(categorie => {
-          if (!categorieMap[categorie]) {
-            categorieMap[categorie] = [];
-          }
-          categorieMap[categorie].push(item.title);
-        });
+      // attrsFiles.forEach(item => {
+      //   item.categories.forEach(categorie => {
+      //     if (!categoryMap[categorie]) {
+      //       categoryMap[categorie] = [];
+      //     }
+      //     categoryMap[categorie].push(item.title);
+      //   });
 
-        item.tags.forEach(tag => {
-          if (!tagMap[tag]) {
-            tagMap[tag] = [];
-          }
-          tagMap[tag].push(item.title);
-        });
-      });
+      //   item.tags.forEach(tag => {
+      //     if (!tagMap[tag]) {
+      //       tagMap[tag] = [];
+      //     }
+      //     tagMap[tag].push(item.title);
+      //   });
+      // });
 
-      let content = {
-        tagMap,
-        categorieMap
-      };
-      fs.writeFileSync('attr.json', JSON.stringify(content), 'utf8');
+      // let content = {
+      //   tagMap,
+      //   categoryMap
+      // };
+      fs.writeFileSync('attr.json', JSON.stringify(attrsFiles), 'utf8');
     })
     .catch(err => console.log(err));
 });
