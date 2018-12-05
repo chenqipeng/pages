@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import About from './views/About.vue'
-import Post from './views/Post.vue'
-import NotFound from './views/NotFound.vue'
+import Home from '@/views/Home.vue'
+import About from '@/views/About.vue'
+import Post from '@/components/Post.vue'
+import Archives from '@/components/Archives.vue'
+import NotFound from '@/views/NotFound.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '*',
@@ -17,13 +18,46 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'home',
       component: Home,
       children: [
         {
+          path: '',
+          name: 'home',
+          components: {
+            archives: Archives
+          }
+        },
+        {
+          path: 'tag/:tag',
+          name: 'tag',
+          components: {
+            archives: Archives
+          },
+          props: {
+            archives: true
+          }
+        },
+        {
+          path: 'category/:category',
+          name: 'category',
+          components: {
+            archives: Archives
+          },
+          props: {
+            archives: true
+          }
+        },
+        {
           path: 'post/:name',
           name: 'post',
-          component: Post
+          components: {
+            archives: Archives,
+            post: Post
+          },
+          props: {
+            archives: true,
+            post: true
+          }
         }
       ]
     },

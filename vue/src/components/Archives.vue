@@ -2,66 +2,45 @@
   <ul class="posts-list">
     <li
       v-for="post in archivesData"
-      :key="post.oid">
-      <span @click="checkPost(post.name)">{{post.name}}</span>
-      <!-- <a :href="'/post/'+post.name">{{post.name}}</a> -->
+      :key="post.name">
+      <span :title="post.name" @click="checkPost(post.name)">{{post.name}}</span>
     </li>
   </ul>
 </template>
 
 <script>
-import {
-  RepositoryOwner,
-  RepositoryName,
-  RepositoryBranch,
-  RepositoryPath
-} from '@/GraphQLConfig'
-
 export default {
   name: 'Archives',
 
-  data () {
-    return {
-      archivesData: []
+  props: {
+    tag: {
+      type: String,
+      default: ''
+    },
+
+    category: {
+      type: String,
+      default: ''
     }
   },
 
-  created () {
-    this.queryArchives()
+  computed: {
+    archivesData () {
+      if (this.tag) {
+        return (this.$store.getters.getArchivesByTag(this.tag) || []).map(el => ({name: el}))
+      } else if (this.category) {
+        return (this.$store.getters.getArchivesBycategory(this.category) || []).map(el => ({name: el}))
+      } else {
+        return this.$store.state.archives
+      }
+    }
   },
 
   methods: {
 
     checkPost (name) {
       this.$router.push('/post/' + name)
-      this.$emit('checkPost', name)
-    },
-
-    queryArchives () {
-      const query = `
-        query {
-          repository(owner: "${RepositoryOwner}", name: "${RepositoryName}") {
-            object(expression: "${RepositoryBranch + RepositoryPath}") {
-              ... on Tree {
-                entries {
-                  name
-                  type
-                  oid
-                }
-              }
-            }
-          }
-        }
-      `
-
-      this.client
-        .request(query)
-        .then(data => {
-          this.archivesData = data.repository.object.entries
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      // this.$emit('checkPost', name)
     }
 
   }
@@ -76,6 +55,9 @@ export default {
   li
     height 30px
     line-height 30px
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
     span
       color #0366d6
       &:hover

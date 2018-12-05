@@ -1,23 +1,17 @@
 <template>
   <div>
     <h1>{{postData.attributes.title}}</h1>
-    <p>
-      <span v-for="cate in postData.attributes.categories"></span>
-    </p>
+    <p>{{postData.attributes.categories.join(',')}}</p>
+    <p>{{postData.attributes.tags.join(',')}}</p>
     <div id="md" class="md markdown-body" v-html="postData.body"/>
   </div>
 </template>
 
 <script>
+import { PresetQuery } from '../http/GraphQLConfig'
 import MarkdownIt from 'markdown-it'
 import FrontMatter from 'front-matter'
 import hljs from 'highlight.js'
-import {
-  RepositoryOwner,
-  RepositoryName,
-  RepositoryBranch,
-  RepositoryPath
-} from '@/GraphQLConfig'
 
 export default {
   name: 'Post',
@@ -48,20 +42,9 @@ export default {
   methods: {
 
     queryPostData () {
-      const query = `
-        query {
-          repository(owner: "${RepositoryOwner}", name: "${RepositoryName}") {
-            object(expression: "${RepositoryBranch + RepositoryPath + this.$route.params.name}") {
-              ... on Blob {
-                text
-              }
-            }
-          }
-        }
-      `
-
-      this.client
-        .request(query)
+      const Query = PresetQuery.queryPost(this.$route.params.name)
+      this.httpClient
+        .request(Query)
         .then(data => {
           let markdownIt = new MarkdownIt({
             highlight (str, lang) {

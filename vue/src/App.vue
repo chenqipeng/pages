@@ -1,31 +1,41 @@
 <template>
   <div id="app">
-    <div class="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+
+    <router-view/>
+
   </div>
 </template>
 
-<style lang="stylus" scoped>
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  color #2c3e50
+<script>
+export default {
+  name: 'App',
 
-.nav
-  position fixed
-  top 0
-  left 0
-  right 0
-  height 40px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+  created () {
+    this.initData()
+  },
+
+  methods: {
+
+    initData () {
+      this.$store.dispatch('setArchivesRemote')
+      this.$store.dispatch('setAttrRemote')
+    }
+
+  }
+}
+</script>
+
+<style lang="stylus">
+// #04202c
+// #304040
+// #5b7065
+// #c9d1c8
+
+body
+  margin 0
+
+ul
+  list-style none
+  margin 0
+  padding 0
 </style>
