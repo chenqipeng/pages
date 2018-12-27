@@ -1,6 +1,7 @@
 ---
 title: Promise基础原理
 date: 2018-04-19 00:25:02
+id: 2018041910
 categories:
 - stuff
 tags:

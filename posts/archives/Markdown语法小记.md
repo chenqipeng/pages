@@ -1,6 +1,7 @@
 ---
 title: Markdown语法小记
 date: 2018-04-19 00:40:56
+id: 2018041907
 categories:
 - stuff
 tags:

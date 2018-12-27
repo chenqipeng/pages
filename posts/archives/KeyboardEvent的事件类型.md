@@ -1,6 +1,7 @@
 ---
 title: KeyboardEvent的事件类型
 date: 2018-04-19 00:29:57
+id: 2018041904
 categories:
 - stuff
 tags:

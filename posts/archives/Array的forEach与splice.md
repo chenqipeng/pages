@@ -1,6 +1,7 @@
 ---
 title: Array的forEach与splice
 date: 2018-04-19 00:15:11
+id: 2018041901
 categories:
 - stuff
 tags:
