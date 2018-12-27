@@ -13,6 +13,10 @@ export default new Vuex.Store({
   },
 
   getters: {
+    getPostById (state) {
+      return id => state.archives.find(el => el.id == id)
+    },
+
     getTags (state) {
       return Object.keys(state.tagMap)
     },
@@ -25,7 +29,7 @@ export default new Vuex.Store({
       return tag => state.tagMap[tag]
     },
 
-    getArchivesBycategory (state) {
+    getArchivesByCategory (state) {
       return category => state.categoryMap[category]
     }
   },
@@ -44,23 +48,8 @@ export default new Vuex.Store({
 
   actions: {
 
-    setArchivesRemote ({ commit }) {
-      const Query = PresetQuery.queryArchives()
-      HttpClient.request(Query)
-        .then(data => {
-          let result = data.repository.object.entries.map(item => {
-            item.name = item.name.replace('.md', '')
-            return item
-          })
-          commit('setArchives', result)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-
-    setAttrRemote ({ commit }) {
-      const Query = PresetQuery.queryAttr()
+    setDigestRemote ({ commit }) {
+      const Query = PresetQuery.queryDigest()
       HttpClient.request(Query)
         .then(data => {
           let dataList = JSON.parse(data.repository.object.text)
@@ -72,17 +61,18 @@ export default new Vuex.Store({
               if (!tagMap[tag]) {
                 tagMap[tag] = []
               }
-              tagMap[tag].push(item.title)
+              tagMap[tag].push(item)
             })
 
             item.categories.forEach(categorie => {
               if (!categoryMap[categorie]) {
                 categoryMap[categorie] = []
               }
-              categoryMap[categorie].push(item.title)
+              categoryMap[categorie].push(item)
             })
           })
 
+          commit('setArchives', dataList)
           commit('setTagMap', tagMap)
           commit('setCategoryMap', categoryMap)
         })

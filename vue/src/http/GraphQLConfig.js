@@ -2,7 +2,7 @@ const RepositoryOwner = 'chenqipeng'
 const RepositoryName = 'pages'
 const RepositoryBranch = 'master:'
 const RepositoryPath = 'posts/archives/'
-const AttrUrl = 'posts/attr.json'
+const DigestUrl = 'posts/digest.json'
 
 const PresetQuery = {
   /**
@@ -26,13 +26,13 @@ const PresetQuery = {
 
   /**
    * 获取文章
-   * @param {String} postName 文章名
+   * @param {String} title 文章名
    */
-  queryPost (postName) {
+  queryPost (title) {
     return `
       query {
         repository(owner: "${RepositoryOwner}", name: "${RepositoryName}") {
-          object(expression: "${RepositoryBranch + RepositoryPath + postName}.md") {
+          object(expression: "${RepositoryBranch + RepositoryPath + title}.md") {
             ... on Blob {
               text
             }
@@ -43,13 +43,13 @@ const PresetQuery = {
   },
 
   /**
-   * 获取博客属性
+   * 获取博客摘要
    */
-  queryAttr () {
+  queryDigest () {
     return `
       query {
         repository(owner: "${RepositoryOwner}", name: "${RepositoryName}") {
-          object(expression: "${RepositoryBranch + AttrUrl}") {
+          object(expression: "${RepositoryBranch + DigestUrl}") {
             ... on Blob {
               text
             }
@@ -61,10 +61,5 @@ const PresetQuery = {
 }
 
 export {
-  RepositoryOwner,
-  RepositoryName,
-  RepositoryBranch,
-  RepositoryPath,
-  AttrUrl,
   PresetQuery
 }

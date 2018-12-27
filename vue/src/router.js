@@ -24,39 +24,29 @@ export default new Router({
           path: '',
           name: 'home',
           components: {
-            archives: Archives
+            side: Archives
           }
         },
         {
           path: 'tag/:tag',
           name: 'tag',
           components: {
-            archives: Archives
-          },
-          props: {
-            archives: true
+            side: Archives
           }
         },
         {
           path: 'category/:category',
           name: 'category',
           components: {
-            archives: Archives
-          },
-          props: {
-            archives: true
+            side: Archives
           }
         },
         {
-          path: 'post/:name',
+          path: 'post/:id',
           name: 'post',
           components: {
-            archives: Archives,
-            post: Post
-          },
-          props: {
-            archives: true,
-            post: true
+            side: Archives,
+            main: Post
           }
         }
       ]

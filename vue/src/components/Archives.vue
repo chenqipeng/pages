@@ -2,8 +2,8 @@
   <ul class="posts-list">
     <li
       v-for="post in archivesData"
-      :key="post.name">
-      <span :title="post.name" @click="checkPost(post.name)">{{post.name}}</span>
+      :key="post.title">
+      <a :href="'/#/post/' + post.id" :title="post.title">{{post.title}}</a>
     </li>
   </ul>
 </template>
@@ -12,37 +12,44 @@
 export default {
   name: 'Archives',
 
-  props: {
-    tag: {
-      type: String,
-      default: ''
-    },
-
-    category: {
-      type: String,
-      default: ''
+  data () {
+    return {
+      archivesData: []
     }
   },
 
-  computed: {
-    archivesData () {
-      if (this.tag) {
-        return (this.$store.getters.getArchivesByTag(this.tag) || []).map(el => ({name: el}))
-      } else if (this.category) {
-        return (this.$store.getters.getArchivesBycategory(this.category) || []).map(el => ({name: el}))
-      } else {
-        return this.$store.state.archives
-      }
+  watch: {
+    '$store.state.archives' () {
+      this.updateArchivesData()
+    },
+    '$route' () {
+      this.updateArchivesData()
     }
+  },
+
+  created () {
+    this.updateArchivesData()
   },
 
   methods: {
-
-    checkPost (name) {
-      this.$router.push('/post/' + name)
-      // this.$emit('checkPost', name)
+    updateArchivesData () {
+      switch (this.$route.name) {
+        case 'home':
+          this.archivesData = this.$store.state.archives
+          break
+        case 'tag':
+          this.archivesData = this.$store.getters.getArchivesByTag(this.$route.params.tag) || []
+          break
+        case 'category':
+          this.archivesData = this.$store.getters.getArchivesByCategory(this.$route.params.category) || []
+          break
+        default:
+          if (!this.archivesData.length) {
+            this.archivesData = this.$store.state.archives
+          }
+          break
+      }
     }
-
   }
 }
 </script>
@@ -58,8 +65,7 @@ export default {
     white-space nowrap
     overflow hidden
     text-overflow ellipsis
-    span
+    a
       color #0366d6
-      &:hover
-        cursor pointer
+      text-decoration none
 </style>

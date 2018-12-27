@@ -3,9 +3,9 @@
 
     <AppHeader class="app-header"/>
 
-    <router-view class="archives" name="archives"/>
+    <router-view class="app-side" name="side"/>
 
-    <router-view class="post" name="post"/>
+    <router-view class="app-main" name="main"/>
 
   </div>
 </template>
@@ -18,17 +18,21 @@ export default {
 
   components: {
     AppHeader
+  },
+
+  computed: {
+
   }
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 app-header-height = 55px
 app-side-width = 240px
 app-side-offset = 10px
 
 .app-container
-  // position relative
+  margin-top app-header-height
 
 .app-header
   position fixed
@@ -38,14 +42,15 @@ app-side-offset = 10px
   height app-header-height
   z-index 2
 
-.archives
+.app-side
   position fixed
   top app-header-height + app-side-offset
   left app-side-offset
+  bottom app-side-offset
   width app-side-width
+  overflow auto
 
-.post
+.app-main
   margin-left app-side-width + app-side-offset * 2
-  margin-top app-header-height
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
 
     <router-view/>
 
@@ -17,8 +17,7 @@ export default {
   methods: {
 
     initData () {
-      this.$store.dispatch('setArchivesRemote')
-      this.$store.dispatch('setAttrRemote')
+      this.$store.dispatch('setDigestRemote')
     }
 
   }
@@ -26,16 +25,6 @@ export default {
 </script>
 
 <style lang="stylus">
-// #04202c
-// #304040
-// #5b7065
-// #c9d1c8
-
 body
   margin 0
-
-ul
-  list-style none
-  margin 0
-  padding 0
 </style>

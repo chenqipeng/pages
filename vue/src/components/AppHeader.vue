@@ -1,9 +1,9 @@
 <template>
   <header class="header-container">
 
-    <a href="/#/" class="nav-item">
-      <span class="nav-btn">Home</span>
-    </a>
+    <div class="nav-item">
+      <a href="/#/" class="nav-btn">Home</a>
+    </div>
 
     <div class="nav-item">
       <span class="nav-btn">Tags</span>
@@ -23,9 +23,9 @@
       </ul>
     </div>
 
-    <a href="/#/about" class="nav-item">
-      <span class="nav-btn">About</span>
-    </a>
+    <div class="nav-item">
+      <a href="/#/about" class="nav-btn">About</a>
+    </div>
 
   </header>
 </template>
@@ -51,36 +51,37 @@ header-bgc = #04202c
 link-color = #ddd
 link-hover-color = #fff
 
-.header-container
-  display flex
-  justify-content flex-start
-  background-color header-bgc
-
 a
 a:visited
   color link-color
   text-decoration none
 
-.nav-item
-  color link-color
-  padding 0 10px
+.header-container
   height 100%
+  background-color header-bgc
+
+.nav-item
+  float left
+  height 100%
+  padding 0 10px
   &:hover
-    .nav-btn
-      cursor pointer
+    cursor pointer
     .nav-expand-list
       display block
 
 .nav-btn
-  display: flex;
-  height: 100%;
-  align-items: center;
-  font-size 16px
+  display flex
+  align-items center
+  height 100%
+  color link-color
 
 .nav-expand-list
   display none
   position absolute
   width 200px
+  margin 0
+  padding 0
+  list-style none
   background-color header-bgc
   li
     padding 0 10px
@@ -90,5 +91,4 @@ a:visited
       display block
       &:hover
         color link-hover-color
-
 </style>
